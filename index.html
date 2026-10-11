@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moda Urbana | Ropa con Estilo</title>
+  <!-- Google Fonts para un diseño moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      color: #1e1e1e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* ----- Utilidades ----- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60%;
+      height: 4px;
+      background: #e63946;
+      border-radius: 4px;
+    }
+
+    /* ----- Header / Navbar ----- */
+    header {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 16px 0;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #1e1e1e;
+      text-decoration: none;
+    }
+    .logo span {
+      color: #e63946;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #2d2d2d;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #e63946;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      font-size: 1.3rem;
+      color: #2d2d2d;
+    }
+    .nav-icons i {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-icons i:hover {
+      color: #e63946;
+    }
+
+    /* ----- Slider principal (banner) ----- */
+    .hero-slider {
+      margin: 24px 0 40px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      background: #ddd;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px 40px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    .slide-content h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 600px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .slide-content p {
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+      opacity: 0.9;
+      max-width: 500px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #e63946;
+      color: white;
+      font-weight: 600;
+      padding: 14px 36px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.25s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(230,57,70,0.3);
+    }
+    .btn:hover {
+      background: #c1121f;
+      transform: translateY(-2px);
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.85);
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #1e1e1e;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+    }
+    .slider-btn:hover {
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .prev {
+      left: 20px;
+    }
+    .next {
+      right: 20px;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
+
+    /* ----- Slider de productos (horizontal scroll) ----- */
+    .products-section {
+      margin: 60px 0;
+    }
+
+    .products-slider-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .products-slider {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 8px 4px 24px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #e63946 #f0f0f0;
+    }
+    .products-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+    .products-slider::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+    .products-slider::-webkit-scrollbar-thumb {
+      background: #e63946;
+      border-radius: 8px;
+    }
+
+    .product-card {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px -8px rgba(0,0,0,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 30px -12px rgba(0,0,0,0.2);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: #f1f1f1;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 20px 18px 24px;
+    }
+    .product-category {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #e63946;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .product-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #1e1e1e;
+    }
+    .product-price {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #1e1e1e;
+      margin-bottom: 14px;
+    }
+    .product-price del {
+      font-size: 0.9rem;
+      color: #999;
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    .slider-arrow {
+      background: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #1e1e1e;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+      flex-shrink: 0;
+      margin: 0 8px;
+      z-index: 5;
+    }
+    .slider-arrow:hover {
+      background: #e63946;
+      color: white;
+      box-shadow: 0 8px 20px rgba(230,57,70,0.4);
+    }
+    .slider-arrow:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ----- Otras secciones (grid) ----- */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 40px 0 60px;
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1.2;
+      background: #ddd;
+    }
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .category-card:hover img {
+      transform: scale(1.04);
+    }
+    .category-label {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1e1e1e;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+    }
+    .category-card:hover .category-label {
+      background: #e63946;
+      color: white;
+    }
+
+    /* ----- Footer ----- */
+    footer {
+      background: #1e1e1e;
+      color: #ccc;
+      padding: 48px 0 24px;
+      margin-top: 60px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-col h4 {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 18px;
+      font-size: 1.1rem;
+    }
+    .footer-col a {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: #e63946;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
+    }
+
+    /* ----- Responsive ----- */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* En móvil se oculta, podrías implementar menú hamburguesa */
+      }
+      .nav-icons {
+        margin-left: auto;
+      }
+      .slide-content {
+        padding: 24px 20px;
+      }
+      .slide-content h2 {
+        font-size: 1.8rem;
+      }
+      .slide-content p {
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+      .btn {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+      .slider-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+      }
+      .prev { left: 8px; }
+      .next { right: 8px; }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .product-card {
+        flex: 0 0 240px;
+      }
+      .slider-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        margin: 0 4px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero-slider {
+        border-radius: 20px;
+        margin: 16px 0 24px;
+      }
+      .slider-container {
+        aspect-ratio: 16 / 10;
+      }
+      .slide-content h2 {
+        font-size: 1.4rem;
+      }
+      .slide-content p {
+        font-size: 0.85rem;
+        display: none; /* Simplifica en pantallas muy pequeñas */
+      }
+      .product-card {
+        flex: 0 0 200px;
+      }
+      .products-slider {
+        gap: 16px;
+      }
+      .category-card {
+        aspect-ratio: 1 / 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav-bar">
+      <a href="#" class="logo">MODA<span>URBANA</span></a>
+      <nav class="nav-links">
+        <a href="#">Inicio</a>
+        <a href="#">Mujer</a>
+        <a href="#">Hombre</a>
+        <a href="#">Accesorios</a>
+        <a href="#">Ofertas</a>
+      </nav>
+      <div class="nav-icons">
+        <i class="fas fa-search"></i>
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-shopping-bag"></i>
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Banner Slider (Principal) -->
+    <div class="container">
+      <div class="hero-slider">
+        <div class="slider-container">
+          <div class="slides" id="heroSlides">
+            <!-- Slide 1 -->
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop" alt="Moda urbana mujer">
+              <div class="slide-content">
+                <h2>Nueva colección<br>Primavera 2025</h2>
+                <p>Descubre las tendencias que marcarán estilo esta temporada.</p>
+                <a href="#" class="btn">Comprar ahora</a>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1470&auto=format&fit=crop" alt="Moda hombre">
+              <div class="slide-content">
+                <h2>Estilo urbano<br>para él</h2>
+                <p>Prendas versátiles y cómodas para el día a día.</p>
+                <a href="#" class="btn">Ver colección</a>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+              <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1471&auto=format&fit=crop" alt="Ofertas especiales">
+              <div class="slide-content">
+                <h2>Hasta 40% off<br>en básicos</h2>
+                <p>Renueva tu armario con descuentos exclusivos online.</p>
+                <a href="#" class="btn">Aprovechar oferta</a>
+              </div>
+            </div>
+          </div>
+          <!-- Controles -->
+          <button class="slider-btn prev" id="prevHero"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-btn next" id="nextHero"><i class="fas fa-chevron-right"></i></button>
+          <div class="slider-dots" id="heroDots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de productos con slider horizontal -->
+    <section class="container products-section">
+      <h2 class="section-title">Lo más vendido</h2>
+      <div class="products-slider-wrapper">
+        <button class="slider-arrow" id="productPrev"><i class="fas fa-chevron-left"></i></button>
+        <div class="products-slider" id="productSlider">
+          <!-- Producto 1 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1470&auto=format&fit=crop" alt="Camiseta oversize">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Camisetas</div>
+              <div class="product-title">Camiseta oversize</div>
+              <div class="product-price">$29.99 <del>$39.99</del></div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+          <!-- Producto 2 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1470&auto=format&fit=crop" alt="Jeans slim">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Pantalones</div>
+              <div class="product-title">Jeans slim fit</div>
+              <div class="product-price">$59.99</div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+          <!-- Producto 3 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1470&auto=format&fit=crop" alt="Chaqueta denim">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Chaquetas</div>
+              <div class="product-title">Chaqueta denim</div>
+              <div class="product-price">$89.99 <del>$119.99</del></div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+          <!-- Producto 4 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1470&auto=format&fit=crop" alt="Vestido floral">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Vestidos</div>
+              <div class="product-title">Vestido floral</div>
+              <div class="product-price">$49.99</div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+          <!-- Producto 5 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1470&auto=format&fit=crop" alt="Sudadera con capucha">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Sudaderas</div>
+              <div class="product-title">Sudadera con capucha</div>
+              <div class="product-price">$44.99 <del>$59.99</del></div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+          <!-- Producto 6 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1470&auto=format&fit=crop" alt="Falda plisada">
+            </div>
+            <div class="product-info">
+              <div class="product-category">Faldas</div>
+              <div class="product-title">Falda plisada</div>
+              <div class="product-price">$39.99</div>
+              <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Añadir al carrito</a>
+            </div>
+          </div>
+        </div>
+        <button class="slider-arrow" id="productNext"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <!-- Categorías destacadas (grid) -->
+    <section class="container">
+      <h2 class="section-title">Explora categorías</h2>
+      <div class="featured-grid">
+        <a href="#" class="category-card">
+          <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1470&auto=format&fit=crop" alt="Mujer">
+          <span class="category-label">Mujer</span>
+        </a>
+        <a href="#" class="category-card">
+          <img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=1470&auto=format&fit=crop" alt="Hombre">
+          <span class="category-label">Hombre</span>
+        </a>
+        <a href="#" class="category-card">
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1470&auto=format&fit=crop" alt="Accesorios">
+          <span class="category-label">Accesorios</span>
+        </a>
+        <a href="#" class="category-card">
+          <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1470&auto=format&fit=crop" alt="Calzado">
+          <span class="category-label">Calzado</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>ModaUrbana</h4>
+          <a href="#">Sobre nosotros</a>
+          <a href="#">Blog</a>
+          <a href="#">Sostenibilidad</a>
+          <a href="#">Trabaja con nosotros</a>
+        </div>
+        <div class="footer-col">
+          <h4>Ayuda</h4>
+          <a href="#">Envíos</a>
+          <a href="#">Devoluciones</a>
+          <a href="#">Guía de tallas</a>
+          <a href="#">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Términos y condiciones</a>
+          <a href="#">Política de privacidad</a>
+          <a href="#">Cookies</a>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 ModaUrbana. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript para sliders -->
+  <script>
+    (function() {
+      // ----- Hero Slider (banner principal) -----
+      const slidesContainer = document.getElementById('heroSlides');
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const prevBtn = document.getElementById('prevHero');
+      const nextBtn = document.getElementById('nextHero');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      function updateHeroSlider() {
+        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        // Actualizar dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateHeroSlider();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateHeroSlider();
+      }
+
+      // Event listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          updateHeroSlider();
+        });
+      });
+
+      // Auto-avance cada 6 segundos
+      let autoInterval = setInterval(nextSlide, 6000);
+
+      // Pausar auto-avance al interactuar
+      const heroSlider = document.querySelector('.hero-slider');
+      heroSlider.addEventListener('mouseenter', () => {
+        clearInterval(autoInterval);
+      });
+      heroSlider.addEventListener('mouseleave', () => {
+        autoInterval = setInterval(nextSlide, 6000);
+      });
+
+      // ----- Slider de productos (scroll horizontal) -----
+      const productSlider = document.getElementById('productSlider');
+      const productPrev = document.getElementById('productPrev');
+      const productNext = document.getElementById('productNext');
+
+      // Desplazamiento basado en el ancho de la tarjeta + gap
+      function getScrollAmount() {
+        const card = productSlider.querySelector('.product-card');
+        if (!card) return 300;
+        const cardWidth = card.offsetWidth;
+        const gap = 24; // según CSS gap
+        return cardWidth + gap;
+      }
+
+      productNext.addEventListener('click', () => {
+        productSlider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      });
+
+      productPrev.addEventListener('click', () => {
+        productSlider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      });
+
+      // Opcional: deshabilitar flechas según scroll (mejora UX)
+      function updateProductArrows() {
+        const scrollLeft = productSlider.scrollLeft;
+        const maxScroll = productSlider.scrollWidth - productSlider.clientWidth;
+        // Deshabilitar prev si estamos al inicio
+        productPrev.disabled = scrollLeft <= 5;
+        // Deshabilitar next si estamos al final (con margen de 5px)
+        productNext.disabled = scrollLeft >= maxScroll - 5;
+      }
+
+      productSlider.addEventListener('scroll', updateProductArrows);
+      window.addEventListener('resize', updateProductArrows);
+      // Inicializar
+      setTimeout(updateProductArrows, 100);
+    })();
+  </script>
+</body>
+</html>
